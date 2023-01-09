@@ -10,6 +10,41 @@ services:
       - ms
     restart: always
 
+  db-lets:
+    container_name: db-lets
+    image: mongo:4.2
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=user
+      - MONGO_INITDB_DATABASE=lets
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./db-lets:/data/db
+    networks:
+      - db
+
+  mongo-express:
+    container_name: mongo-express
+    image: mongo-express
+    restart: always
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=db-lets
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=user
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=pass
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=tribes
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db-lets
+    networks:
+      - db
+
 networks:
   ms:
     driver: bridge
+  db:
+    driver: bridge
+
