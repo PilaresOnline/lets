@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  ms-eureka:
+    container_name: ms-eureka
+    build: ./DEPENDENCES/ms-eureka
+    ports:
+      - "8761:8761"
+    networks:
+      - ms
+    restart: always
+
+networks:
+  ms:
+    driver: bridge
