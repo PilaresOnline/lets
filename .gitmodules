@@ -1,0 +1,3 @@
+[submodule "DEPENDENCES/ms-eureka"]
+	path = DEPENDENCES/ms-eureka
+	url = git@github.com:PilaresOnline/ms-eureka.git
